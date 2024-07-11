@@ -1,0 +1,65 @@
+/* 全体のスタイル */
+body {
+    background-color: #faeec6; /* クリーム色 */
+    color: #333;
+    font-family: 'Arial', sans-serif;
+}
+
+header, footer {
+    background-color: #f4a460; /* オレンジ色 */
+    color: #2E8B57; /* 緑色 */
+    padding: 10px 0;
+    text-align: center;
+}
+
+header nav a, footer p {
+    color: #2E8B57; /* 緑色 */
+}
+
+main {
+    padding: 20px;
+}
+
+/* レスポンシブデザイン */
+@media (max-width: 768px) {
+    header nav {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    header nav a {
+        margin: 5px 0;
+    }
+}
+
+/* テーブルスタイル */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+table, th, td {
+    border: 1px solid #ddd;
+}
+
+th, td {
+    padding: 8px;
+    text-align: left;
+}
+
+th {
+    background-color: #f4a460; /* オレンジ色 */
+    color: #2E8B57; /* 緑色 */
+}
+
+td {
+    background-color: #fff;
+}
+
+footer {
+    margin-top: 20px;
+    border-top: 1px solid #ddd;
+    padding-top: 10px;
+}

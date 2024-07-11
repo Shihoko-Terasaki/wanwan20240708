@@ -10,6 +10,16 @@ class Event extends Model
     use HasFactory;
 
     protected $fillable = [
-        'name', 'description', 'event_date', 'area', 'breed'
+        'title',
+        'description',
+        'event_date',
+        'location',
+        'area',
+        'breed',
     ];
+
+    public function comments()
+    {
+        return $this->hasMany(Comment::class);
+    }
 }

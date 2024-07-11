@@ -5,6 +5,7 @@ use App\Http\Controllers\EventController;
 use App\Http\Controllers\InquiryController;
 use App\Http\Controllers\AdminEventController;
 use App\Http\Controllers\AdminUserController;
+use App\Http\Controllers\CommentController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -25,6 +26,9 @@ Route::middleware('auth')->group(function () {
     Route::get('/events/create', [EventController::class, 'create'])->name('events.create');
     Route::post('/events', [EventController::class, 'store'])->name('events.store');
     Route::get('/events/{event}', [EventController::class, 'show'])->name('events.show');
+
+    // コメント関連のルート
+    Route::post('/events/{event}/comments', [CommentController::class, 'store'])->name('comments.store');
 
     // 問い合わせ関連のルート
     Route::get('/inquiries', [InquiryController::class, 'index'])->name('inquiries.index');

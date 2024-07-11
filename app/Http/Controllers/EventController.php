@@ -23,7 +23,7 @@ class EventController extends Controller
             $query->whereDate('event_date', $request->date);
         }
 
-        $events = $query->get();
+        $events = $query->paginate(10);
 
         return view('events.index', compact('events'));
     }

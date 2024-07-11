@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Inquiry;
 use Illuminate\Http\Request;
+use App\Models\Inquiry;
+use Illuminate\Support\Facades\Mail;
 
 class InquiryController extends Controller
 {
@@ -20,8 +21,20 @@ class InquiryController extends Controller
 
     public function store(Request $request)
     {
-        Inquiry::create($request->all());
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|email|max:255',
+            'message' => 'required|string|max:2000',
+        ]);
 
-        return redirect()->route('inquiries.index');
+        $inquiry = Inquiry::create($request->all());
+
+        // 自動返信メールの送信
+        Mail::send('emails.inquiry_received', ['inquiry' => $inquiry], function ($message) use ($inquiry) {
+            $message->to($inquiry->email, $inquiry->name)
+                ->subject('お問い合わせありがとうございます');
+        });
+
+        return redirect()->route('inquiries.create')->with('success', 'お問い合わせ内容が送信されました。');
     }
 }
