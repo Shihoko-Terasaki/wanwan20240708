@@ -61,5 +61,23 @@ td {
 footer {
     margin-top: 20px;
     border-top: 1px solid #ddd;
-    padding-top: 10px;
+}
+
+/* 検索フォームスタイル */
+.search-form {
+    margin-bottom: 20px;
+}
+
+.search-form .form-group {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.search-form .form-control {
+    flex: 1;
+}
+
+.search-form .btn {
+    flex-shrink: 0;
 }

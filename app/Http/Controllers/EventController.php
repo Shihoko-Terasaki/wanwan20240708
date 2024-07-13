@@ -35,6 +35,15 @@ class EventController extends Controller
 
     public function store(Request $request)
     {
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'description' => 'required|string',
+            'event_date' => 'required|date',
+            'location' => 'required|string|max:255',
+            'area' => 'required|string|max:255',
+            'breed' => 'required|string|max:255',
+        ]);
+
         Event::create($request->all());
 
         return redirect()->route('events.index');
@@ -45,3 +54,4 @@ class EventController extends Controller
         return view('events.show', compact('event'));
     }
 }
+

@@ -3,48 +3,49 @@
 @section('content')
 <div class="container">
     <h1>イベント一覧</h1>
-    <form action="{{ route('events.index') }}" method="GET" class="mb-4">
-        <div class="form-row">
-            <div class="col">
-                <input type="text" name="area" class="form-control" placeholder="地域" value="{{ request('area') }}">
-            </div>
-            <div class="col">
-                <input type="text" name="breed" class="form-control" placeholder="犬種" value="{{ request('breed') }}">
-            </div>
-            <div class="col">
-                <input type="date" name="date" class="form-control" value="{{ request('date') }}">
-            </div>
-            <div class="col">
-                <button type="submit" class="btn btn-primary">検索</button>
-            </div>
+    
+    <form method="GET" action="{{ route('events.index') }}">
+        <div class="form-group">
+            <label for="area">エリア</label>
+            <input type="text" class="form-control" id="area" name="area" value="{{ request('area') }}">
         </div>
+
+        <div class="form-group">
+            <label for="breed">犬種</label>
+            <input type="text" class="form-control" id="breed" name="breed" value="{{ request('breed') }}">
+        </div>
+
+        <div class="form-group">
+            <label for="date">日付</label>
+            <input type="date" class="form-control" id="date" name="date" value="{{ request('date') }}">
+        </div>
+
+        <button type="submit" class="btn btn-primary">フィルタリング</button>
     </form>
 
-    @if($events->count())
-        <table class="table">
-            <thead>
+    <table class="table mt-3">
+        <thead>
+            <tr>
+                <th>イベント名</th>
+                <th>日付</th>
+                <th>場所</th>
+                <th>エリア</th>
+                <th>犬種</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach ($events as $event)
                 <tr>
-                    <th>イベント名</th>
-                    <th>日付</th>
-                    <th>場所</th>
-                    <th></th>
+                    <td><a href="{{ route('events.show', $event) }}">{{ $event->name }}</a></td>
+                    <td>{{ $event->event_date }}</td>
+                    <td>{{ $event->location }}</td>
+                    <td>{{ $event->area }}</td>
+                    <td>{{ $event->breed }}</td>
                 </tr>
-            </thead>
-            <tbody>
-                @foreach($events as $event)
-                    <tr>
-                        <td>{{ $event->name }}</td>
-                        <td>{{ $event->event_date }}</td>
-                        <td>{{ $event->location }}</td>
-                        <td><a href="{{ route('events.show', $event) }}" class="btn btn-info">詳細</a></td>
-                    </tr>
-                @endforeach
-            </tbody>
-        </table>
+            @endforeach
+        </tbody>
+    </table>
 
-        {{ $events->links() }}
-    @else
-        <p>該当するイベントがありません。</p>
-    @endif
+    {{ $events->links() }}
 </div>
 @endsection

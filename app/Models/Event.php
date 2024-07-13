@@ -10,12 +10,7 @@ class Event extends Model
     use HasFactory;
 
     protected $fillable = [
-        'title',
-        'description',
-        'event_date',
-        'location',
-        'area',
-        'breed',
+        'name', 'description', 'event_date', 'location', 'area', 'breed'
     ];
 
     public function comments()
